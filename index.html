@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Your Name">
+    <title>Bear Ninja Hunter Game</title>
+</head>
+<body>
+    <h1>Bear Ninja Hunter</h1>
+    <p id="gameResults">Welcome to the game!</p>
+
+    <script>
+     
+        let playAgain = true;
+        let playerName = prompt("Welcome! What is your name?");
+        if (!playerName) {
+            playerName = "Player";
+        }
+        alert("Hello, " + playerName + "! Let's play Bear Ninja Hunter!");
+
+        const choices = ["Bear", "Ninja", "Hunter"];
+
+        while (playAgain) {
+
+            let computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+            let playerChoice = prompt("Choose Bear, Ninja, or Hunter:").toLowerCase();
+
+            if (!playerChoice) {
+                alert("No input received. Please refresh the page and try again.");
+                break;
+            }
+
+            playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
+
+            if (!choices.includes(playerChoice)) {
+                alert("Invalid input! Please enter Bear, Ninja, or Hunter exactly.");
+                continue;
+            }
+
+            let result = "";
+            if (playerChoice === computerChoice) {
+                result = "It's a tie!";
+            } else if (
+                (playerChoice === "Bear" && computerChoice === "Ninja") ||
+                (playerChoice === "Ninja" && computerChoice === "Hunter") ||
+                (playerChoice === "Hunter" && computerChoice === "Bear")
+            ) {
+                result = playerName + " wins!";
+            } else {
+                result = "Computer wins!";
+            }
+
+            alert(playerName + " chose " + playerChoice + ", computer chose " + computerChoice + ". " + result);
+
+            document.getElementById("gameResults").innerHTML = playerName + " chose " + playerChoice + ", computer chose " + computerChoice + ". " + result;
+
+            console.log(playerName + " chose " + playerChoice + ", computer chose " + computerChoice + ". " + result);
+
+            playAgain = confirm("Do you want to play again?");
+        }
+
+        if (!playAgain) {
+            document.getElementById("gameResults").innerHTML += "<br>Thanks for playing, " + playerName + "!";
+            console.log("Game ended by player.");
+        }
+    </script>
+</body>
+</html>
